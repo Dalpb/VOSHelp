@@ -1,6 +1,7 @@
 import { Flex, Layout } from "antd";
 import styles from "./vgmemoryview.module.css";
 
+//contains about layout
 const VGmemoryview = () => {
   const { Header, Footer, Content } = Layout;
   return (
