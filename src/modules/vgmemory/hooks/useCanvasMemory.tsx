@@ -14,25 +14,23 @@ const useCanvasMemory = ({ containerRef, canvasRef }: Props): ReturnProps => {
   let container;
   let width 
   let height 
-  //el pincel
   let ctx : CanvasRenderingContext2D | null |undefined 
 
+  //incializa el canvas y espacio limite
   const initCanvas = () => {
     canvas = canvasRef.current;
     container = containerRef.current;
-    //dimensión de mi espacio campas :D
     width = container?.clientWidth;
     height = container?.clientHeight;
     console.log(width, height);
-
-    //el pincel
     ctx = canvas?.getContext("2d");
     console.log(ctx);
   };
+
+  //dibujará un bloque de memoria
   const createBlockMemory = () => {
-    const memory = new Memory(0, 0, 100, 150, "");
+    const memory = new Memory(0, 0, 60, 110, "NULL");
     if (ctx) {
-      console.log("entro");
       memory.draw(ctx);
     }
   };

@@ -14,15 +14,17 @@ class Memory {
   }
   draw(ctx : CanvasRenderingContext2D){
     ctx.beginPath();
+    ctx.font="20px Fira Code"
     ctx.fillStyle = "#333";
     ctx.fillRect(this.xPos,this.yPos,this.width,this.height);
     ctx.strokeStyle = "#fff";
     ctx.lineWidth = 3
     ctx.strokeRect(this.xPos,this.yPos,this.width,this.height);
-    ctx.fillStyle = "fff";
-    ctx.fillText(this.innerTxt,this.width/2,this.height/3);
-    console.log(typeof this);
-    ctx.closePath();
+    if(this instanceof Memory){
+      ctx.fillStyle = "#fff";
+      ctx.fillText(this.innerTxt,this.width/3,this.height/2);
+      ctx.closePath();
+    }
   }
 }
 
