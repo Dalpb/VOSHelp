@@ -1,17 +1,18 @@
-import { Flex, Layout } from "antd";
+import {  Layout } from "antd";
 import styles from "./vgmemoryview.module.css";
+import MemoryCanvas from "@vgmemory/components/memorycanva/memorycanva";
 
 //contains about layout
 const VGmemoryview = () => {
   const { Header, Footer, Content } = Layout;
   return (
-    <Layout>
+    <Layout className={styles.layout}>
       <Header>VGMemory</Header>
-      <Content>
-        <Flex gap="middle">
-          <section className={styles.canva_section}></section>
+      <Content className={styles.container}>
+          <section className={styles.canva_section}>
+            <MemoryCanvas/>
+          </section>
           <section className={styles.code_section}></section>
-        </Flex>
       </Content>
       <Footer></Footer>
     </Layout>
