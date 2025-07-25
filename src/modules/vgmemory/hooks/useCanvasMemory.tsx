@@ -1,4 +1,5 @@
 import Memory from "@vgmemory/canvas/memory";
+import Variable from "@vgmemory/canvas/variable";
 import type { RefObject } from "react";
 
 interface Props {
@@ -29,7 +30,7 @@ const useCanvasMemory = ({ containerRef, canvasRef }: Props): ReturnProps => {
 
   //dibujará un bloque de memoria
   const createBlockMemory = () => {
-    const memory = new Memory(0, 0, 60, 110, "NULL");
+    const memory = new Variable(0, 0, 100, 160,"empty","base");
     if (ctx) {
       memory.draw(ctx);
     }
