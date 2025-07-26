@@ -24,7 +24,8 @@
     "noUncheckedSideEffectImports": true,
     "baseUrl": "./src",
     "paths": {
-      "@vgmemory/*":["./modules/vgmemory/*"]
+      "@vgmemory/*":["./modules/vgmemory/*"],
+      "@utils/*":["./utils/*"]
     }
   },
   "include": ["src"]

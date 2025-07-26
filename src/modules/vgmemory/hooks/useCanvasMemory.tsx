@@ -30,7 +30,7 @@ const useCanvasMemory = ({ containerRef, canvasRef }: Props): ReturnProps => {
 
   //dibujará un bloque de memoria
   const createBlockMemory = () => {
-    const memory = new Variable(0, 0, 100, 160,"empty","base");
+    const memory = new Variable(0, 0, 100, 160,"0x000","*fredddp");
     if (ctx) {
       memory.draw(ctx);
     }
