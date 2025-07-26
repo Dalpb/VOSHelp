@@ -1,5 +1,6 @@
 import useCanvasMemory from "@vgmemory/hooks/useCanvasMemory";
 import { useEffect, useRef } from "react"
+import styles from "@vgmemory/styles/memorycanvas.module.css"
 
 const MemoryCanvas = () =>{
     const containerRef = useRef<HTMLDivElement | null>(null);
@@ -13,7 +14,7 @@ const MemoryCanvas = () =>{
     },[])
         
     return(
-        <div ref={containerRef}>
+        <div className={styles["canvas-container"]} ref={containerRef}>
             <canvas ref={canvasRef}></canvas>
         </div>
     )
