@@ -45,6 +45,14 @@ class Header extends Variable {
     const size = `size=${this.size}`
     const ptr = "*ptr"
     ctx.fillRect(this.gapLineS,this.baseLineS,3,this.topLineX-this.baseLineS);
+    let width = getWidthText(ctx,ptr);
+    let height = getHeightText(ctx,ptr);
+    let x = centerTxtHorizontaly(this.gapLineS,this.xPos+this.width,width);
+    let y = centerTxtVerticaly(this.baseLineS,this.topLineX,height);
+    ctx.fillText(ptr,x,y);
+    width = getWidthText(ctx,size);
+    x = centerTxtHorizontaly(this.xPos,this.gapLineS,width);
+    ctx.fillText(size,x,y);
   }
   public drawSpaceX(ctx: CanvasRenderingContext2D): void {
     ctx.fillStyle = "#fff";
