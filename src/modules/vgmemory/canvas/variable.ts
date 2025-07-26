@@ -1,10 +1,15 @@
-import { centerTxtHorizontaly, centerTxtVerticaly, getHeightText, getWidthText } from "@utils/canvasutils";
+import {
+  centerTxtHorizontaly,
+  centerTxtVerticaly,
+  getHeightText,
+  getWidthText,
+} from "@utils/canvasutils";
 import Memory from "./memory";
 
 //this entity represent a variable, pointer
 class Variable extends Memory {
   protected name: string = "";
-  private gaplines: number = this.height / 3;
+  private gaplines: number = this.height / 3; //recta que separa el nombre de la variable
   constructor(
     xpos: number,
     ypos: number,
@@ -20,21 +25,24 @@ class Variable extends Memory {
   drawHeader(ctx: CanvasRenderingContext2D) {
     ctx.fillStyle = "#fff";
     ctx.fillRect(this.xPos, this.yPos + this.gaplines, this.width, 3);
-    const width = getWidthText(ctx,this.name);
-    const height = getHeightText(ctx,this.name);
-    const x = centerTxtHorizontaly(this.xPos,this.xPos+this.width,width);
-    const y = centerTxtVerticaly(this.yPos,this.xPos+this.gaplines,height);
-    ctx.fillText(this.name,x,y);
+    const width = getWidthText(ctx, this.name);
+    const height = getHeightText(ctx, this.name);
+    const x = centerTxtHorizontaly(this.xPos, this.xPos + this.width, width);
+    const y = centerTxtVerticaly(this.yPos, this.yPos + this.gaplines, height);
+    ctx.fillText(this.name, x, y);
   }
 
   public drawContent(ctx: CanvasRenderingContext2D): void {
     ctx.fillStyle = "#fff";
-    //falta considerar el gapline, overline
-    ctx.fillText(
-      this.innerTxt,
-      this.xPos + this.width / 3,
-      this.yPos + this.height - 30
+    const width = getWidthText(ctx, this.innerTxt);
+    const height = getHeightText(ctx, this.innerTxt);
+    const x = centerTxtHorizontaly(this.xPos, this.xPos + this.width, width);
+    const y = centerTxtVerticaly(
+      this.yPos + this.gaplines,
+      this.yPos + this.height,
+      height
     );
+    ctx.fillText(this.innerTxt, x, y);
   }
 
   draw(ctx: CanvasRenderingContext2D): void {

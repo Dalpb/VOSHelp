@@ -1,3 +1,10 @@
+import { 
+  centerTxtHorizontaly,
+  centerTxtVerticaly,
+  getHeightText,
+  getWidthText
+} from "@utils/canvasutils";
+
 class Memory {
   protected xPos: number = 0;
   protected yPos: number = 0;
@@ -27,10 +34,14 @@ class Memory {
   }
   public drawContent(ctx: CanvasRenderingContext2D): void {
     ctx.fillStyle = "#fff";
+    const width = getWidthText(ctx, this.innerTxt);
+    const height = getHeightText(ctx, this.innerTxt);
+    const x = centerTxtHorizontaly(this.xPos,this.xPos+this.width,width);
+    const y = centerTxtVerticaly(this.yPos,this.yPos+this.height,height);
     ctx.fillText(
       this.innerTxt,
-      this.xPos + this.width / 3,
-      this.yPos + this.height / 2
+      x,
+      y
     );
   }
 
