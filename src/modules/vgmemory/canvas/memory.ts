@@ -1,8 +1,8 @@
-import { 
+import {
   centerTxtHorizontaly,
   centerTxtVerticaly,
   getHeightText,
-  getWidthText
+  getWidthText,
 } from "@utils/canvasutils";
 
 class Memory {
@@ -24,6 +24,8 @@ class Memory {
     this.innerTxt = innerTxt ?? "";
     this.height = height;
   }
+  
+
 
   public drawBody(ctx: CanvasRenderingContext2D) {
     ctx.fillStyle = "#333";
@@ -32,22 +34,19 @@ class Memory {
     ctx.fillRect(this.xPos, this.yPos, this.width, this.height);
     ctx.strokeRect(this.xPos, this.yPos, this.width, this.height);
   }
+
   public drawContent(ctx: CanvasRenderingContext2D): void {
     ctx.fillStyle = "#fff";
     const width = getWidthText(ctx, this.innerTxt);
     const height = getHeightText(ctx, this.innerTxt);
-    const x = centerTxtHorizontaly(this.xPos,this.xPos+this.width,width);
-    const y = centerTxtVerticaly(this.yPos,this.yPos+this.height,height);
-    ctx.fillText(
-      this.innerTxt,
-      x,
-      y
-    );
+    const x = centerTxtHorizontaly(this.xPos, this.xPos + this.width, width);
+    const y = centerTxtVerticaly(this.yPos, this.yPos + this.height, height);
+    ctx.fillText(this.innerTxt, x, y);
   }
 
   public draw(ctx: CanvasRenderingContext2D) {
     ctx.beginPath();
-    ctx.font = `20px Fira Code`;
+    ctx.font = `17px Fira Code`;
     this.drawBody(ctx);
     this.drawContent(ctx);
     ctx.closePath();

@@ -1,3 +1,4 @@
+import Header from "@vgmemory/canvas/header";
 import Memory from "@vgmemory/canvas/memory";
 import Variable from "@vgmemory/canvas/variable";
 import type { RefObject } from "react";
@@ -30,7 +31,7 @@ const useCanvasMemory = ({ containerRef, canvasRef }: Props): ReturnProps => {
 
   //dibujará un bloque de memoria
   const createBlockMemory = () => {
-    const memory = new Variable(0, 0, 100, 160,"0x000","*freep");
+    const memory = new Header(0,0,140,150,"","base")
     if (ctx) {
       memory.draw(ctx);
     }

@@ -9,7 +9,7 @@ import Memory from "./memory";
 //this entity represent a variable, pointer
 class Variable extends Memory {
   protected name: string = "";
-  private gaplines: number = this.height / 3; //recta que separa el nombre de la variable
+  protected gaplines: number = this.height / 3.8; //recta que separa el nombre de la variable
   constructor(
     xpos: number,
     ypos: number,
@@ -29,6 +29,7 @@ class Variable extends Memory {
     const height = getHeightText(ctx, this.name);
     const x = centerTxtHorizontaly(this.xPos, this.xPos + this.width, width);
     const y = centerTxtVerticaly(this.yPos, this.yPos + this.gaplines, height);
+
     ctx.fillText(this.name, x, y);
   }
 
@@ -45,7 +46,7 @@ class Variable extends Memory {
     ctx.fillText(this.innerTxt, x, y);
   }
 
-  draw(ctx: CanvasRenderingContext2D): void {
+  public draw(ctx: CanvasRenderingContext2D): void {
     super.draw(ctx);
     ctx.beginPath();
     this.drawHeader(ctx);
