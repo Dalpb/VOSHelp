@@ -38,7 +38,7 @@ const useCanvasMemory = ({ containerRef, canvasRef }: Props): ReturnProps => {
   const createBlockMemory = () => {
     let ctx = ctxRef.current;
     const memory = new Header(0,0,110,100,"","base")
-    const row1 = new Arrow({x:620,y:100},{x:200,y:250});
+    const row1 = new Arrow({x:120,y:560},{x:300,y:250});
     if (ctx) {
       memory.draw(ctx);
       row1.draw(ctx);

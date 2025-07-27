@@ -1,8 +1,9 @@
 import type { Node } from "@interfaces/Node";
+import { applyPitagoras, calculateAngle } from "@utils/canvasutils";
 class Arrow {
   private initPos: Node;
   private endPos: Node;
-  private width: number = 3;
+  private width: number = 2;
   private color: string;
   constructor(endPos: Node, starPos: Node, color: string = "#fff") {
     this.endPos = endPos;
@@ -12,11 +13,30 @@ class Arrow {
 
   //dead bruh
   public calculateDistance(): number {
-    const difX = Math.pow(this.initPos.x - this.endPos.x, 2);
-    const difY = Math.pow(this.endPos.y - this.initPos.y, 2);
-    return Math.sqrt(difX + difY);
+    return applyPitagoras(this.endPos.x-this.initPos.x,this.endPos.y-this.initPos.y);
   }
+  public calculateAngleRow(): number {
+    return calculateAngle(this.initPos.x,this.initPos.y,this.endPos.x,this.endPos.y);
+  }
+  //mi amga
+  public calculatePosArrow(h: number, alpha:number): {posLeft: Node,posRight:Node}{
+  const opLeg = h * Math.sin(alpha);
+  const adLeg = h * Math.cos(alpha);
+  const theta = this.calculateAngleRow();
+  const w = Math.atan(opLeg / adLeg);
+  const d1 = h
+  const { x, y } = this.endPos;
+  const posLeft: Node = {
+    x: x - d1 * Math.cos(theta + w),
+    y: y - d1 * Math.sin(theta + w)
+  };
+  const posRight: Node = {
+    x: x - d1 * Math.cos(theta - w),
+    y: y - d1 * Math.sin(theta - w)
+  };
 
+  return { posLeft, posRight };
+  }
   public drawBody(ctx: CanvasRenderingContext2D): void {
     ctx.beginPath();
     ctx.moveTo(this.initPos.x, this.initPos.y);
@@ -29,22 +49,17 @@ class Arrow {
 
   public drawTop(ctx: CanvasRenderingContext2D): void {
     //solo considero angulo < 90 wasaaa
-    //Revisando mi AMGA
-    const hypotenuse = 100; //en fin la hipotenusa
-    const angle = Math.PI/3;
+    //Revisando mi AMGA, debe haber ora forma 
+    const hypotenuse = 25; //tamaño del arrow
+    const angle = Math.PI/6;
     const {x,y} = this.endPos;
-    const opLeg = hypotenuse*Math.sin(angle);
-    const adLeg = hypotenuse*Math.cos(angle);
+    const vertices = this.calculatePosArrow(hypotenuse,angle);
+    const {posLeft,posRight} = vertices;
     ctx.beginPath();
     ctx.moveTo(x,y);
-    console.log("x-opLeg",x-opLeg);
-    console.log("x-adLeg",x-adLeg);
-    console.log("y-adLeg",x-adLeg);
-    console.log("y-opLeg",x-opLeg);
-
-    ctx.lineTo(x-opLeg,y+adLeg)
+    ctx.lineTo(posLeft.x,posLeft.y);
+    ctx.lineTo(posRight.x,posRight.y);
     ctx.lineTo(x,y);
-    ctx.lineTo(x-adLeg, y-opLeg);
     ctx.lineWidth = this.width;
     ctx.strokeStyle = this.color;
     ctx.stroke();

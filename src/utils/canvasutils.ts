@@ -17,3 +17,18 @@ export const centerTxtVerticaly = (initY : number,endY:number,heightTxt:number):
     const txtPos = midY + heightTxt/2; //canvas tiene eje Y invertido -Y
     return txtPos;
 }
+
+//teorema de pitagoras
+export const applyPitagoras = (opLeg:number,adLeg:number): number =>{
+    const a = Math.pow(opLeg,2);
+    const b = Math.pow(adLeg,2);
+    const c = Math.sqrt(a+b);
+    return c;
+}
+//angulo de inclinación en radianes
+export const calculateAngle =(x1: number, y1: number, x2: number, y2: number): number => {
+  const dx = x2 - x1;
+  const dy = y2 - y1;
+  const angleRad = Math.atan2(dy, dx); 
+  return angleRad;
+}
