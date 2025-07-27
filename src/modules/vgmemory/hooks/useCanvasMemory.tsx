@@ -21,23 +21,22 @@ const useCanvasMemory = ({ containerRef, canvasRef }: Props): ReturnProps => {
     canvas = canvasRef.current;
     container = containerRef.current;
     if(!canvas || !container){
-      console.error("Canvas o contener no renderizados");
+      console.error("Error: elemento canvas o contener de canvas no renderizados");
       return;
     }
+
     const width = container.clientWidth;
     const height = container.clientHeight;
     //me falto definir canvas su altura y anchura
     canvas.width = width;
     canvas.height = height;
-    console.log("canvas dimension",width, height);
-    ctxRef.current = canvas?.getContext("2d");
+    ctxRef.current = canvas.getContext("2d");
   };
 
   //dibujará un bloque de memoria
   const createBlockMemory = () => {
-    const memory = new Header(0,0,140,150,"","base")
     let ctx = ctxRef.current;
-    console.log(ctx);
+    const memory = new Header(0,0,110,100,"","base")
     if (ctx) {
       memory.draw(ctx);
     }

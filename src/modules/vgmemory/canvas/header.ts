@@ -7,11 +7,9 @@ import {
 import Variable from "./variable";
 //representa a la structura de header que mandan en SO LAB6
 class Header extends Variable {
-  private baseLineS: number; //linea base del campo s
+  private lineBasePtr: number; //linea base de ptr
   private topLineX: number; //linea top del campo x
   private size = 0; //valor de size
-  private gapLineS: number; //linea que separa el campo *ptr y size
-
   constructor(
     xpos: number,
     ypos: number,
@@ -21,20 +19,19 @@ class Header extends Variable {
     name: string
   ) {
     super(xpos, ypos, height, width, innerTxt, name);
-    this.baseLineS = this.yPos + this.gaplines + this.height / 6; // pos line eje y
-    this.topLineX = this.yPos + this.height - this.height / 6; //pos line eje y
-    this.gapLineS = (2 * this.xPos + this.width) / 2; //pos eje x
+    this.lineBasePtr = this.yPos + this.gaplines + this.height / 5; // pos line eje y
+    this.topLineX = this.yPos + this.height - this.height / 5; //pos line eje y
   }
   public drawSpaceS(ctx: CanvasRenderingContext2D): void {
     ctx.fillStyle = "#fff";
-    const letter = "s";
-    ctx.fillRect(this.xPos, this.baseLineS, this.width, 3);
+    const letter = "ptr";
+    ctx.fillRect(this.xPos, this.lineBasePtr, this.width, 3);
     const width = getWidthText(ctx, letter);
     const height = getHeightText(ctx, letter);
     const x = centerTxtHorizontaly(this.xPos, this.xPos + this.width, width);
     const y = centerTxtVerticaly(
       this.yPos + this.gaplines,
-      this.baseLineS,
+      this.lineBasePtr,
       height
     );
     ctx.fillText(letter, x, y);
@@ -42,16 +39,11 @@ class Header extends Variable {
   //mejorar estructuración de función
   public drawBodyS(ctx: CanvasRenderingContext2D): void {
     ctx.fillStyle ="#fff";
-    const size = `size=${this.size}`
-    const ptr = "*ptr"
-    ctx.fillRect(this.gapLineS,this.baseLineS,3,this.topLineX-this.baseLineS);
-    let width = getWidthText(ctx,ptr);
-    let height = getHeightText(ctx,ptr);
-    let x = centerTxtHorizontaly(this.gapLineS,this.xPos+this.width,width);
-    let y = centerTxtVerticaly(this.baseLineS,this.topLineX,height);
-    ctx.fillText(ptr,x,y);
-    width = getWidthText(ctx,size);
-    x = centerTxtHorizontaly(this.xPos,this.gapLineS,width);
+    const size = `size:${this.size}`
+    let width = getWidthText(ctx,size);
+    let height = getHeightText(ctx,size);
+    let x = centerTxtHorizontaly(this.xPos,this.xPos+this.width,width);
+    let y = centerTxtVerticaly(this.lineBasePtr,this.topLineX,height);
     ctx.fillText(size,x,y);
   }
   public drawSpaceX(ctx: CanvasRenderingContext2D): void {
