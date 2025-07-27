@@ -25,7 +25,8 @@
     "baseUrl": "./src",
     "paths": {
       "@vgmemory/*":["./modules/vgmemory/*"],
-      "@utils/*":["./utils/*"]
+      "@utils/*":["./utils/*"],
+      "@interfaces/*":["./interfaces/*"]
     }
   },
   "include": ["src"]

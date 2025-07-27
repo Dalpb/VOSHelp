@@ -48,7 +48,7 @@ class Header extends Variable {
   }
   public drawSpaceX(ctx: CanvasRenderingContext2D): void {
     ctx.fillStyle = "#fff";
-    const letter = "x";
+    const letter = "x ";
     ctx.fillRect(this.xPos,this.topLineX,this.width,3);
     const width = getWidthText(ctx, letter);
     const height = getHeightText(ctx, letter);

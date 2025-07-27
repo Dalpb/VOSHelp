@@ -20,9 +20,10 @@ class Variable extends Memory {
   ) {
     super(xpos, ypos, height, width, innerTxt);
     this.name = name;
+    //creería que se podría hacer de otra forma
   }
 
-  drawHeader(ctx: CanvasRenderingContext2D) {
+  drawHeader(ctx: CanvasRenderingContext2D): void  {
     ctx.fillStyle = "#fff";
     ctx.fillRect(this.xPos, this.yPos + this.gaplines, this.width, 3);
     const width = getWidthText(ctx, this.name);
