@@ -25,17 +25,15 @@ class Memory {
     this.height = height;
   }
   
-
-
-  public drawBody(ctx: CanvasRenderingContext2D) {
+  protected drawBody(ctx: CanvasRenderingContext2D) {
     ctx.fillStyle = "#333";
     ctx.strokeStyle = "#fff";
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 1.5;
     ctx.fillRect(this.xPos, this.yPos, this.width, this.height);
     ctx.strokeRect(this.xPos, this.yPos, this.width, this.height);
   }
 
-  public drawContent(ctx: CanvasRenderingContext2D): void {
+  protected drawContent(ctx: CanvasRenderingContext2D): void {
     ctx.fillStyle = "#fff";
     const width = getWidthText(ctx, this.innerTxt);
     const height = getHeightText(ctx, this.innerTxt);

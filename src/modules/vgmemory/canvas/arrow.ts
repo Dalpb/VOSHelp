@@ -12,32 +12,58 @@ class Arrow {
   }
 
   //dead bruh
-  public calculateDistance(): number {
-    return applyPitagoras(this.endPos.x-this.initPos.x,this.endPos.y-this.initPos.y);
+  private calculateDistance(): number {
+    return applyPitagoras(
+      this.endPos.x - this.initPos.x,
+      this.endPos.y - this.initPos.y
+    );
   }
-  public calculateAngleRow(): number {
-    return calculateAngle(this.initPos.x,this.initPos.y,this.endPos.x,this.endPos.y);
+  private calculateAngleRow(): number {
+    return calculateAngle(
+      this.initPos.x,
+      this.initPos.y,
+      this.endPos.x,
+      this.endPos.y
+    );
   }
   //mi amga
-  public calculatePosArrow(h: number, alpha:number): {posLeft: Node,posRight:Node}{
-  const opLeg = h * Math.sin(alpha);
-  const adLeg = h * Math.cos(alpha);
-  const theta = this.calculateAngleRow();
-  const w = Math.atan(opLeg / adLeg);
-  const d1 = h
-  const { x, y } = this.endPos;
-  const posLeft: Node = {
-    x: x - d1 * Math.cos(theta + w),
-    y: y - d1 * Math.sin(theta + w)
-  };
-  const posRight: Node = {
-    x: x - d1 * Math.cos(theta - w),
-    y: y - d1 * Math.sin(theta - w)
-  };
+  private calculatePosArrow(
+    h: number,
+    alpha: number
+  ): { posLeft: Node; posRight: Node } {
+    const opLeg = h * Math.sin(alpha);
+    const adLeg = h * Math.cos(alpha);
+    const theta = this.calculateAngleRow();
+    const w = Math.atan(opLeg / adLeg);
+    const d1 = h;
+    const { x, y } = this.endPos;
+    const posLeft: Node = {
+      x: x - d1 * Math.cos(theta + w),
+      y: y - d1 * Math.sin(theta + w),
+    };
+    const posRight: Node = {
+      x: x - d1 * Math.cos(theta - w),
+      y: y - d1 * Math.sin(theta - w),
+    };
 
-  return { posLeft, posRight };
+    return { posLeft, posRight };
   }
-  public drawBody(ctx: CanvasRenderingContext2D): void {
+  private drawTail(ctx:CanvasRenderingContext2D): void{
+    ctx.beginPath();
+    const r = 4;
+    const theta = this.calculateAngleRow();
+    const {x,y} = this.initPos;
+    const opLeg = r * Math.sin(theta);
+    const adLeg = r * Math.cos(theta); 
+    const xCenter = x + adLeg;
+    const yCenter = y +opLeg;
+    ctx.arc(xCenter,yCenter,r,0,Math.PI*2);
+    ctx.fillStyle ="aqua";
+    ctx.fill();
+    ctx.closePath();
+  }
+
+  private drawBody(ctx: CanvasRenderingContext2D): void {
     ctx.beginPath();
     ctx.moveTo(this.initPos.x, this.initPos.y);
     ctx.lineTo(this.endPos.x, this.endPos.y);
@@ -46,20 +72,19 @@ class Arrow {
     ctx.stroke();
     ctx.closePath();
   }
-
-  public drawTop(ctx: CanvasRenderingContext2D): void {
+  private drawTop(ctx: CanvasRenderingContext2D): void {
     //solo considero angulo < 90 wasaaa
-    //Revisando mi AMGA, debe haber ora forma 
-    const hypotenuse = 25; //tamaño del arrow
-    const angle = Math.PI/6;
-    const {x,y} = this.endPos;
-    const vertices = this.calculatePosArrow(hypotenuse,angle);
-    const {posLeft,posRight} = vertices;
+    //Revisando mi AMGA, debe haber ora forma
+    const hypotenuse = 15; //tamaño del arrow
+    const angle = Math.PI / 8;
+    const { x, y } = this.endPos;
+    const vertices = this.calculatePosArrow(hypotenuse, angle);
+    const { posLeft, posRight } = vertices;
     ctx.beginPath();
-    ctx.moveTo(x,y);
-    ctx.lineTo(posLeft.x,posLeft.y);
-    ctx.lineTo(posRight.x,posRight.y);
-    ctx.lineTo(x,y);
+    ctx.moveTo(x, y);
+    ctx.lineTo(posLeft.x, posLeft.y);
+    ctx.lineTo(posRight.x, posRight.y);
+    ctx.lineTo(x, y);
     ctx.lineWidth = this.width;
     ctx.strokeStyle = this.color;
     ctx.stroke();
@@ -71,6 +96,7 @@ class Arrow {
 
   public draw(ctx: CanvasRenderingContext2D): void {
     this.drawBody(ctx);
+    this.drawTail(ctx);
     this.drawTop(ctx);
   }
 }

@@ -22,7 +22,7 @@ class Header extends Variable {
     this.lineBasePtr = this.yPos + this.gaplines + this.height / 5; // pos line eje y
     this.topLineX = this.yPos + this.height - this.height / 5; //pos line eje y
   }
-  public drawSpaceS(ctx: CanvasRenderingContext2D): void {
+  protected drawSpaceS(ctx: CanvasRenderingContext2D): void {
     ctx.fillStyle = "#fff";
     const letter = "ptr";
     ctx.fillRect(this.xPos, this.lineBasePtr, this.width, 3);
@@ -37,31 +37,31 @@ class Header extends Variable {
     ctx.fillText(letter, x, y);
   }
   //mejorar estructuración de función
-  public drawBodyS(ctx: CanvasRenderingContext2D): void {
-    ctx.fillStyle ="#fff";
-    const size = `size:${this.size}`
-    let width = getWidthText(ctx,size);
-    let height = getHeightText(ctx,size);
-    let x = centerTxtHorizontaly(this.xPos,this.xPos+this.width,width);
-    let y = centerTxtVerticaly(this.lineBasePtr,this.topLineX,height);
-    ctx.fillText(size,x,y);
+  protected drawBodyS(ctx: CanvasRenderingContext2D): void {
+    ctx.fillStyle = "#fff";
+    const size = `size:${this.size}`;
+    let width = getWidthText(ctx, size);
+    let height = getHeightText(ctx, size);
+    let x = centerTxtHorizontaly(this.xPos, this.xPos + this.width, width);
+    let y = centerTxtVerticaly(this.lineBasePtr, this.topLineX, height);
+    ctx.fillText(size, x, y);
   }
-  public drawSpaceX(ctx: CanvasRenderingContext2D): void {
+  protected drawSpaceX(ctx: CanvasRenderingContext2D): void {
     ctx.fillStyle = "#fff";
     const letter = "x ";
-    ctx.fillRect(this.xPos,this.topLineX,this.width,3);
+    ctx.fillRect(this.xPos, this.topLineX, this.width, 3);
     const width = getWidthText(ctx, letter);
     const height = getHeightText(ctx, letter);
     const x = centerTxtHorizontaly(this.xPos, this.xPos + this.width, width);
     const y = centerTxtVerticaly(
       this.topLineX,
-      this.yPos+this.height,
+      this.yPos + this.height,
       height
     );
-    ctx.fillText(letter, x, y);    
+    ctx.fillText(letter, x, y);
   }
 
-  public drawContent(ctx: CanvasRenderingContext2D): void {
+  protected drawContent(ctx: CanvasRenderingContext2D): void {
     this.drawSpaceS(ctx);
     this.drawBodyS(ctx);
     this.drawSpaceX(ctx);

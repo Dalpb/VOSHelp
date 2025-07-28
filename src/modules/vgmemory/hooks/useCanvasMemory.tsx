@@ -10,19 +10,21 @@ interface Props {
 }
 interface ReturnProps {
   initCanvas: () => void;
-  createBlockMemory: () => void;
+  createInitialMemoryBlocks: () => void;
 }
 const useCanvasMemory = ({ containerRef, canvasRef }: Props): ReturnProps => {
   let canvas;
   let container;
-  const ctxRef = useRef<CanvasRenderingContext2D | null |undefined>(null)
+  const ctxRef = useRef<CanvasRenderingContext2D | null | undefined>(null);
 
   //incializa el canvas y espacio limite
   const initCanvas = () => {
     canvas = canvasRef.current;
     container = containerRef.current;
-    if(!canvas || !container){
-      console.error("Error: elemento canvas o contener de canvas no renderizados");
+    if (!canvas || !container) {
+      console.error(
+        "Error: elemento canvas o contener de canvas no renderizados"
+      );
       return;
     }
 
@@ -34,20 +36,26 @@ const useCanvasMemory = ({ containerRef, canvasRef }: Props): ReturnProps => {
     ctxRef.current = canvas.getContext("2d");
   };
 
-  //dibujará un bloque de memoria
-  const createBlockMemory = () => {
+  //la estructura basica al iniciar simulacion
+  const createInitialMemoryBlocks = () => {
     let ctx = ctxRef.current;
-    const memory = new Header(0,0,110,100,"","base")
-    const row1 = new Arrow({x:120,y:560},{x:300,y:250});
-    if (ctx) {
-      memory.draw(ctx);
-      row1.draw(ctx);
+    if (!ctx) {
+      console.error("Pincel ctx, nulo");
+      return;
     }
+    const base = new Header(10, 10, 110, 100, "", "base");
+    const spaceNull = new Memory(290, 10, 40, 70, "NULL");
+    const freep = new Variable(150, 10, 90, 80, "0x000", "*freep");
+    const row = new Arrow({x:290,y:15},{x:230,y:15})
+    base.draw(ctx);
+    spaceNull.draw(ctx);
+    freep.draw(ctx);
+    row.draw(ctx);
   };
 
   return {
     initCanvas,
-    createBlockMemory,
+    createInitialMemoryBlocks,
   };
 };
 

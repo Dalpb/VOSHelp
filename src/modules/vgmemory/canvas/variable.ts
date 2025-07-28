@@ -23,7 +23,7 @@ class Variable extends Memory {
     //creería que se podría hacer de otra forma
   }
 
-  drawHeader(ctx: CanvasRenderingContext2D): void  {
+  protected drawHeader(ctx: CanvasRenderingContext2D): void  {
     ctx.fillStyle = "#fff";
     ctx.fillRect(this.xPos, this.yPos + this.gaplines, this.width, 3);
     const width = getWidthText(ctx, this.name);
@@ -34,7 +34,7 @@ class Variable extends Memory {
     ctx.fillText(this.name, x, y);
   }
 
-  public drawContent(ctx: CanvasRenderingContext2D): void {
+  protected drawContent(ctx: CanvasRenderingContext2D): void {
     ctx.fillStyle = "#fff";
     const width = getWidthText(ctx, this.innerTxt);
     const height = getHeightText(ctx, this.innerTxt);

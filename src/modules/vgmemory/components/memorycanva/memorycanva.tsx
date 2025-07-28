@@ -10,7 +10,7 @@ const MemoryCanvas = () =>{
 
     useEffect(()=>{
         canvasMemoryhook.initCanvas();
-        canvasMemoryhook.createBlockMemory();
+        canvasMemoryhook.createInitialMemoryBlocks();
     },[])
         
     return(
