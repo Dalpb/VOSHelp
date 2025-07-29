@@ -12,7 +12,9 @@ const VGmemoryview = () => {
           <section className={styles.canva_section}>
             <MemoryCanvas/>
           </section>
-          <section className={styles.code_section}></section>
+          <section className={styles.code_section}>
+            
+          </section>
       </Content>
       <Footer></Footer>
     </Layout>

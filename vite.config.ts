@@ -17,6 +17,9 @@ export default defineConfig({
       {
         find:'@interfaces',
         replacement:path.resolve(path.join(__dirname),'/src/interfaces')
+      },{
+        find:'@assets',
+        replacement:path.resolve(path.join(__dirname,'/src/assets'))
       }
     ]
   }
