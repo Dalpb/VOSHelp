@@ -25,8 +25,8 @@ export const PanelCode = ({
       hljs.highlightElement(codeRef.current);
     }, []);
     return (
-      <pre>
-        <code ref={codeRef} className={`language-${language}`}>
+      <pre style={{margin:0}}>
+        <code style={{padding:0,color:"#cad4e1"}} ref={codeRef} className={`language-${language}`}>
           {code}
         </code>
       </pre>

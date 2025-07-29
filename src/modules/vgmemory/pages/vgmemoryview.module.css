@@ -1,21 +1,52 @@
-.layout{
-    min-height: 100vh;
+/*No para móviles gal*/
+.layout {
+  min-height: 100vh;
+  color: white;
+  background-color: var(--background_simulation);
 }
-.container{
-    min-height: 80%;
-    display: flex;
+.header {
+  color: white;
+  background-color: var(--background_header_simulation);
+  border-bottom: 1.5px var(--clr_paragraph) solid;
+  & > h1 {
+    margin: 0;
+    font-size: x-large;
+    font-weight: bold;
+  }
 }
-.container > div{
-    height: 100%;
-}
+.container {
+  min-height: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 20px 15px;
 
-.canva_section{
+  /*queria probar nesting xD   #1f192fb5*/
+
+  & > section {
+    background-color: var(--background_canvas);
+    border-radius: 10px;
+  }
+
+  /*canvas container styles*/
+  & > section:first-of-type {
     width: 60%;
     flex: 1;
-    background-color: rgb(84, 85, 85);
-}
-.code_section{
+  }
+  /*code container styles*/
+  & > section:nth-of-type(2) {
     width: 40%;
     max-width: 50%;
     min-width: 30%;
+  }
+}
+section > header > h1 {
+  margin: 0;
+  margin-bottom: 20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 10px 5px;
+
+  background-color: var(--background_button);
+  color: #fff;
 }
