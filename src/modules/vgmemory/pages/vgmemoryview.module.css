@@ -40,13 +40,15 @@
     min-width: 30%;
   }
 }
-section > header > h1 {
-  margin: 0;
-  margin-bottom: 20px;
+section > header{
+  background-color: var(--background_canvas_header);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  padding: 10px 5px;
-
-  background-color: var(--background_button);
+  display: flex;
+  margin-bottom: 20px;
+}
+section > header > h1 {
+  margin: 0;
+  padding: .5rem 1rem;
   color: #fff;
 }

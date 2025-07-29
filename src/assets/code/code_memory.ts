@@ -1,6 +1,5 @@
-export const mallocCode : string = `
-void *xmalloc (size_t nbytes)
-{
+export const mallocCode : string =
+`void *xmalloc (size_t nbytes){
 	Header  *p, *prevp;
 	size_t nunits;
 
@@ -29,10 +28,9 @@ void *xmalloc (size_t nbytes)
 			if ((p = morecore(nunits)) == NULL)
 				return NULL; 
 	}
-}
-`
-export const xfreeCode : string = `
-void xfree(void *ap)
+}`
+export const xfreeCode : string = 
+`void xfree(void *ap)
 {
 	Header *bp, *p;
 
@@ -59,11 +57,9 @@ void xfree(void *ap)
 		p->s.ptr = bp;
 
 	freep = p; /* estrategia next-fit */
-}
-
-`
-export const morecoreCode: string =`
-static Header *morecore(size_t nu)
+}`
+export const morecoreCode: string =
+`static Header *morecore(size_t nu)
 {
 	char *cp;
 	Header *up;
@@ -77,5 +73,4 @@ static Header *morecore(size_t nu)
 	up ->s.size = nu;
 	xfree((void *)(up+1));
 	return freep;
-}
-`
+}`

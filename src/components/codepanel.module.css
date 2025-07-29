@@ -1,0 +1,13 @@
+.codepanel {
+  counter-reset: codecounter;
+}
+.linecode {
+  display: flex;
+  padding: 0 0.6rem;
+  &::before {
+    counter-increment: codecounter;
+    content: counter(codecounter);
+    margin-right: 0.5rem;
+    color: var(--clr_paragraph);
+  }
+}

@@ -1,4 +1,4 @@
-import { Layout } from "antd";
+import { Layout,Badge } from "antd";
 import styles from "./vgmemoryview.module.css";
 import MemoryCanvas from "@vgmemory/components/memorycanva/memorycanva";
 import CodePanelMemory from "@vgmemory/components/memorycodepanel/codeEditorMemory";
@@ -19,9 +19,6 @@ const VGmemoryview = () => {
           <MemoryCanvas />
         </section>
         <section>
-          <header>
-            <h1>malloc.c</h1>
-          </header>
           <CodePanelMemory />
         </section>
       </Content>

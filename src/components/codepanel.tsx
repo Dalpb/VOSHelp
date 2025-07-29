@@ -1,6 +1,6 @@
 import hljs from "highlight.js";
 import { useEffect, useRef } from "react";
-
+import styles from "@components/codepanel.module.css"
 interface LineCodeProps {
   code: string;
   isRunning: boolean;
@@ -25,8 +25,8 @@ export const PanelCode = ({
       hljs.highlightElement(codeRef.current);
     }, []);
     return (
-      <pre style={{margin:0}}>
-        <code style={{padding:0,color:"#cad4e1"}} ref={codeRef} className={`language-${language}`}>
+      <pre style={{margin:0}} className={styles.linecode}>
+        <code style={{padding:0,backgroundColor:"transparent"}} ref={codeRef} className={`language-${language}`}>
           {code}
         </code>
       </pre>
@@ -34,7 +34,7 @@ export const PanelCode = ({
   };
 
   return (
-    <div>
+    <div className={styles.codepanel}>
       {linesCode.map((code, index) => (
         <LineCode
           key={`${nameCode}-line-${index + 1}`}
