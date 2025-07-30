@@ -18,3 +18,18 @@
 body{
     margin: 0;
 }
+
+
+/*modificaciones de ant UI*/
+/*Tabs tab mod*/
+.ant-tabs-tab{
+    background-color: var(--background_canvas_header) !important;
+    color: var(--clr_paragraph) !important;
+}
+.ant-tabs-tab.ant-tabs-tab-active{
+    background-color: var(--background_canvas) !important;
+}
+.ant-tabs-tab-active > div{
+    color: var(--background_card) !important;
+    font-weight: bold;
+}

@@ -13,6 +13,10 @@ const CodePanelMemory = () => {
       <Tabs
         type="card"
         onChange={handleChange}
+        tabBarStyle={{
+          backgroundColor:"#292547",
+          color:"white"
+        }}
         items={[
           {
             label: "malloc.c",
