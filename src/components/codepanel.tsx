@@ -11,6 +11,7 @@ interface PanelCodeProps {
   nameCode: string;
 }
 //mi panal para cualquier otro codigo de cualquier lenguaje, pensando para el LAB02
+//ya está el front, y ahora qué hago...
 export const PanelCode = ({
   nameCode,
   linesCode,

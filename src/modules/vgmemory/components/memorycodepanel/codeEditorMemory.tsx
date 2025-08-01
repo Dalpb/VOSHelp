@@ -1,11 +1,11 @@
-import { mallocCode, morecoreCode, xfreeCode } from "@assets/code/code_memory";
+import { mainCode, mallocCode, morecoreCode, xfreeCode } from "@assets/code/code_memory";
 import { PanelCode } from "@components/codepanel";
 import { Tabs } from "antd";
 const CodePanelMemory = () => {
   const mallocLines = mallocCode.split("\n");
   const morecoreLines = morecoreCode.split("\n");
   const xfreeCodeLines = xfreeCode.split("\n");
-
+  const mainCodeLines = mainCode.split('\n');
   const handleChange = () => {};
 
   return (
@@ -13,11 +13,12 @@ const CodePanelMemory = () => {
       <Tabs
         type="card"
         onChange={handleChange}
-        tabBarStyle={{
-          backgroundColor:"#292547",
-          color:"white"
-        }}
         items={[
+          {
+            label:"main.c",
+            key:"main",
+            children: <PanelCode language="c" linesCode={mainCodeLines} nameCode="main.c"  />,
+          },
           {
             label: "malloc.c",
             key: "malloc",
@@ -32,7 +33,7 @@ const CodePanelMemory = () => {
             label: "xfree.c",
             key: "xfree",
             children: <PanelCode language="c" linesCode={xfreeCodeLines} nameCode="xfree.c"  />,
-          },
+          }
         ]}
       />
     </>
