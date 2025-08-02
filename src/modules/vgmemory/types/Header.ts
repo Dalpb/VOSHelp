@@ -3,5 +3,6 @@ export interface header {
     ptr: header | null
     size: number;
   };
-  x: number;
+  x: number
+  dir: number,
 }
