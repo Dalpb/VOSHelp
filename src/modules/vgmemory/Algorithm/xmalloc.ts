@@ -1,12 +1,14 @@
 //read only con el codigo que muestro en el UI
 //SOLO PARA BESTFIT
 import type { header } from "@vgmemory/types/Header";
-
+import useActionStore from "@vgmemory/store/useActionsStore";
+import { createActionChangeFile, createActionVariable } from "@vgmemory/utils/actionsUtils";
+const state = useActionStore.getState();
 const NALLOC: number = 1024;
 const SIZEOFHEADER: number = 16;
 let SIMUMEMORY: number = 100000; //simulará el sbrk
 let freep: header | null = null;
-let nextfreeAdress = 10; //esta cosa para simular las dire de emmoria
+let nextfreeAdress = 100; //esta cosa para simular las dire de emmoria
 const base: header = {
   s: {
     ptr: null,
@@ -16,7 +18,7 @@ const base: header = {
   dir: 1,
 };
 //solo colocar acciones q nostrar en UI donde se necesite
-export function xrun(unidadv: number) {
+/*export function xrun(unidadv: number) {
 if(unidadv <= 0)return;
   let x = 0;
   let unidad = unidadv;
@@ -28,15 +30,27 @@ if(unidadv <= 0)return;
     xmalloc(base*unidad);
     x++;
   } while (x <= 6);
+}*/
+
+export function xruntest() {
+  const action = createActionChangeFile("malloc.c");
+  state.addAction(action,10);
+  xmalloc(1024);
 }
 
 function xmalloc(nbytes: number) {
+
   let p: header | null;
   let prevp: header | null;
   //muestro creación de estos campos
+  let action = createActionVariable(10,"0x000","p");
+  state.addAction(action,2);
+  action = createActionVariable(20,"0x000","prevp");
+  state.addAction(action,2);
 
-  let sizeofHeader: number = 16; // sizeof(Header) bytes
-  let nunits = Math.floor((nbytes + SIZEOFHEADER - 1) / SIZEOFHEADER + 1);
+
+  return;
+ /* let nunits = Math.floor((nbytes + SIZEOFHEADER - 1) / SIZEOFHEADER + 1);
   //muesto la cantidad de espacio en headers que necesito
 
   prevp = freep;
@@ -64,9 +78,9 @@ function xmalloc(nbytes: number) {
             size: nunits,
           },
           x: 0,
-          dir:nextfreeAdress,
+          dir: nextfreeAdress,
         };
-        nextfreeAdress += nunits; 
+        nextfreeAdress += nunits;
       }
       freep = prevp;
       //cambio de puntero
@@ -80,7 +94,7 @@ function xmalloc(nbytes: number) {
       if (!more) return null; //se acabo lo simulado
       p = more; //continuo
     }
-  }
+  }*/
 }
 
 function morecore(nu: number) {
@@ -115,22 +129,21 @@ function xfree(ap: header): void {
 
   //ubicamos donde posicionarlo
   while (p && p.s.ptr && !(bp.dir > p.dir && bp.dir < p.s.ptr.dir)) {
-    if( p.dir >= p.s.ptr.dir && (bp.dir > p.dir || bp.dir < p.s.ptr.dir))break;
+    if (p.dir >= p.s.ptr.dir && (bp.dir > p.dir || bp.dir < p.s.ptr.dir)) break;
     p = p.s.ptr; //paso al siguiente
   }
 
-  if(bp.dir + bp.s.size === p?.s.ptr?.dir){
+  if (bp.dir + bp.s.size === p?.s.ptr?.dir) {
     bp.s.size += p.s.ptr.s.size;
     bp.s.ptr = p.s.ptr!.s.ptr;
-  }
-  else{
+  } else {
     bp.s.ptr = p!.s.ptr;
   }
 
-  if(p!.dir + p!.s.size === bp.dir){
+  if (p!.dir + p!.s.size === bp.dir) {
     p!.s.size += bp.s.size;
     p!.s.ptr = bp.s.ptr;
-  } else{
+  } else {
     p!.s.ptr = bp;
   }
 

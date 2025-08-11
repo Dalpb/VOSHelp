@@ -5,6 +5,9 @@
   background-color: var(--background_simulation);
 }
 .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   color: white;
   background-color: var(--background_header_simulation);
   border-bottom: 1.5px var(--clr_paragraph) solid;

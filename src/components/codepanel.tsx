@@ -7,6 +7,8 @@ interface LineCodeProps {
 }
 interface PanelCodeProps {
   linesCode: Array<string>;
+  isVisible:boolean;
+  lineExecute:number;
   language: string;
   nameCode: string;
 }
@@ -16,6 +18,8 @@ export const PanelCode = ({
   nameCode,
   linesCode,
   language,
+  isVisible,
+  lineExecute
 }: PanelCodeProps) => {
 
   //representa solo una linea de codigo de cualquier lenguaje
@@ -23,12 +27,13 @@ export const PanelCode = ({
     const codeRef = useRef<HTMLElement>(null);
     useEffect(() => {
       if (!codeRef.current) return;
+      codeRef.current.textContent = code;
+      codeRef.current.removeAttribute("data-highlighted");
       hljs.highlightElement(codeRef.current);
-    }, []);
+    }, [code]);
     return (
-      <pre style={{margin:0}} className={styles.linecode}>
+      <pre style={{margin:0}} className={`${styles.linecode} ${isRunning && styles.execute}`}>
         <code style={{padding:0,backgroundColor:"transparent"}} ref={codeRef} className={`language-${language}`}>
-          {code}
         </code>
       </pre>
     );
@@ -40,7 +45,7 @@ export const PanelCode = ({
         <LineCode
           key={`${nameCode}-line-${index + 1}`}
           code={code}
-          isRunning={false}
+          isRunning={isVisible && index+1 == lineExecute}
         />
       ))}
     </div>
