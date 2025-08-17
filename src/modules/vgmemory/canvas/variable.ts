@@ -9,8 +9,9 @@ import Memory from "./memory";
 //this entity represent a variable, pointer
 class Variable extends Memory {
   protected name: string = "";
-  protected gaplines: number = this.height / 3.8; //recta que separa el nombre de la variable
+  protected gaplines: number = this.height / 3.4; //recta que separa el nombre de la variable
   constructor(
+    direction: number,
     xpos: number,
     ypos: number,
     height: number,
@@ -18,7 +19,7 @@ class Variable extends Memory {
     innerTxt: string,
     name: string
   ) {
-    super(xpos, ypos, height, width, innerTxt);
+    super(direction,xpos, ypos, height, width,innerTxt);
     this.name = name;
     //creería que se podría hacer de otra forma
   }

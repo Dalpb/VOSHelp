@@ -1,13 +1,13 @@
-interface MemoryContent {
+export interface MemoryContent {
   dir: number; //unique
   content: string;
 }
 
-interface VariableContent extends MemoryContent {
+export interface VariableContent extends MemoryContent {
   name: string;
 }
 
-interface HeaderContent extends VariableContent {
+export interface HeaderContent extends VariableContent {
   size: number;
 }
 

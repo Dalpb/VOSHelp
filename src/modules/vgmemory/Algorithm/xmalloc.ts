@@ -4,6 +4,16 @@ import type { header } from "@vgmemory/types/Header";
 import useActionStore from "@vgmemory/store/useActionsStore";
 import { createActionChangeFile, createActionVariable } from "@vgmemory/utils/actionsUtils";
 const state = useActionStore.getState();
+export const DIR_BASE:number = 10; //direccion de memoria supuestas 
+export const DIR_FREEP:number = 20;
+export const DIR_NULL:number = 0;
+export const DIR_P:number = 30;
+export const DIR_PREVP: number=40;
+export const DIR_UP:number=50;
+export const DIR_CP:number=60;
+export const DIR_BP: number=70;
+export const DIR_P2:number=80;
+
 const NALLOC: number = 1024;
 const SIZEOFHEADER: number = 16;
 let SIMUMEMORY: number = 100000; //simulará el sbrk
@@ -43,14 +53,13 @@ function xmalloc(nbytes: number) {
   let p: header | null;
   let prevp: header | null;
   //muestro creación de estos campos
-  let action = createActionVariable(10,"0x000","p");
+  let action = createActionVariable(30,"0x000","p");
   state.addAction(action,2);
-  action = createActionVariable(20,"0x000","prevp");
+  action = createActionVariable(40,"0x000","prevp");
   state.addAction(action,2);
 
 
-  return;
- /* let nunits = Math.floor((nbytes + SIZEOFHEADER - 1) / SIZEOFHEADER + 1);
+  let nunits = Math.floor((nbytes + SIZEOFHEADER - 1) / SIZEOFHEADER + 1);
   //muesto la cantidad de espacio en headers que necesito
 
   prevp = freep;
@@ -94,7 +103,7 @@ function xmalloc(nbytes: number) {
       if (!more) return null; //se acabo lo simulado
       p = more; //continuo
     }
-  }*/
+  }
 }
 
 function morecore(nu: number) {

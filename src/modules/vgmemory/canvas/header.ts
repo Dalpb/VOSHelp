@@ -11,17 +11,22 @@ class Header extends Variable {
   private topLineX: number; //linea top del campo x
   private size = 0; //valor de size
   constructor(
+    direction:number,
     xpos: number,
     ypos: number,
     height: number,
     width: number,
     innerTxt: string,
-    name: string
+    name: string,
+    size:number
   ) {
-    super(xpos, ypos, height, width, innerTxt, name);
+    super(direction,xpos, ypos, height, width, innerTxt, name);
     this.lineBasePtr = this.yPos + this.gaplines + this.height / 5; // pos line eje y
     this.topLineX = this.yPos + this.height - this.height / 5; //pos line eje y
+    this.size =size;
   }
+
+
   protected drawSpaceS(ctx: CanvasRenderingContext2D): void {
     ctx.fillStyle = "#fff";
     const letter = "ptr";

@@ -16,7 +16,6 @@ const VGmemoryview = () => {
     setInitSimulation(true);
   };
   const handleNext = () => {
-    console.log("dsad");
     nextLineAction();
   };
 
@@ -36,7 +35,7 @@ const VGmemoryview = () => {
           <header>
             <h1>Simulación manejo de memoria</h1>
           </header>
-          <MemoryCanvas />
+          <MemoryCanvas init={initSimulation} />
         </section>
         <section>
           <CodePanelMemory initSimulation={initSimulation} />

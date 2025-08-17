@@ -11,20 +11,39 @@ class Memory {
   protected height: number = 0;
   protected width: number = 0;
   protected innerTxt: string = "";
+  protected direction: number 
   constructor(
+    direction: number,
     xpos: number,
     ypos: number,
     height: number,
     width: number,
-    innerTxt?: string
+    innerTxt?: string,
   ) {
     this.xPos = xpos;
     this.yPos = ypos;
     this.width = width;
     this.innerTxt = innerTxt ?? "";
     this.height = height;
+    this.direction = direction;
   }
   
+  public getDirection():number{
+    return this.direction;
+  }
+  public getPosicionX(): number{
+    return this.xPos;
+  }
+  public getPosicionY(): number{
+    return this.yPos;
+  }
+  public getWidth(): number{
+    return this.width;
+  }
+  public getHeight(): number{
+    return this.height
+  }
+
   protected drawBody(ctx: CanvasRenderingContext2D) {
     ctx.fillStyle = "#333";
     ctx.strokeStyle = "#fff";
