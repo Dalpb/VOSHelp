@@ -58,14 +58,14 @@ const useCanvasMemory = ({ containerRef, canvasRef }: Props): ReturnProps => {
       DIR_P,
       DIR_P2,
       DIR_PREVP,
-      DIR_UP,
+      DIR_UP,DIR_NULL
     ].some((d) => dir == d);
 
   //rota un x y Y considerando el width y heiht para colocar el componente
   
 const findFreeSpaceCanvas = (dir: number, width: number, height: number,blocks: Array<Block>) => {
-  const marginX = 2;
-  const marginY = 20;
+  const marginX = 10;
+  const marginY = 10;
 
   const occupied = blocks;
 
@@ -130,14 +130,14 @@ const findFreeSpaceCanvas = (dir: number, width: number, height: number,blocks: 
     ctxRef.current = canvas.getContext("2d");
   };
 
-  //la estructura basica al iniciar simulacion, arreglar func fea
+  //la estructura basica al iniciar simulacion
   const createInitialMemoryBlocks = () => {
     let ctx = ctxRef.current;
     if (!ctx) {
       console.error("Pincel ctx, nulo");
       return;
     }
-    const blocks : Array<Block> = [] 
+    const blocks : Array<Block> = [];
     let pos = findFreeSpaceCanvas(DIR_BASE, 110, 100,blocks);
 
     const base = new Header(DIR_BASE, pos.x, pos.y, 110, 100, "", "base", 0);
@@ -145,11 +145,14 @@ const findFreeSpaceCanvas = (dir: number, width: number, height: number,blocks: 
     base.draw(ctx);
     blocks.push({x:base.getPosicionX(),y:base.getPosicionY(),w:base.getWidth(),h:base.getHeight()});
     pos = findFreeSpaceCanvas(DIR_FREEP,70,80,blocks);  
-    
     const freep = new Variable(DIR_FREEP, pos.x, pos.y, 70, 80, "0x000", "*freep");
-    
     setMemory(freep);
     freep.draw(ctx);
+    blocks.push({x:freep.getPosicionX(),y:freep.getPosicionY(),w:freep.getWidth(),h:freep.getHeight()})
+    pos = findFreeSpaceCanvas(DIR_NULL,60,60,blocks);
+    const memNUll = new Memory(DIR_NULL,pos.x,pos.y,60,60,"NULL");
+    setMemory(memNUll);
+    memNUll.draw(ctx);
   };
 
   const ManageCanvasDrawAction = (action: ActionsT) => {
@@ -178,9 +181,19 @@ const findFreeSpaceCanvas = (dir: number, width: number, height: number,blocks: 
   const createHeaderCanvas = (contentH: HeaderContent) => {
     const { content, dir, name, size } = contentH;
     const ctx = ctxRef.current;
+    console.log("entra");
     if (!ctx) return;
-    const header = new Header(dir, 50, 50, 110, 100, content, name, size);
+  
+    const blocks: Block[] = Array.from(memoryMap.values()).map((mem) => ({
+  x: mem.getPosicionX(),
+  y: mem.getPosicionY(),
+  w: mem.getWidth(),
+  h: mem.getHeight(),
+}));
+    const pos = findFreeSpaceCanvas(dir,110,100,blocks);
+    const header = new Header(dir, pos.x,pos.y, 110, 100, content, name, size);
     setMemory(header);
+    console.log("Dibuja")
     header.draw(ctx);
   };
   const createMemoryCanvas = (contentM: MemoryContent) => {};

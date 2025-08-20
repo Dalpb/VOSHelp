@@ -2,7 +2,7 @@
 //SOLO PARA BESTFIT
 import type { header } from "@vgmemory/types/Header";
 import useActionStore from "@vgmemory/store/useActionsStore";
-import { createActionChangeFile, createActionVariable } from "@vgmemory/utils/actionsUtils";
+import { createActionChangeFile, createActionPointing, createActionVariable } from "@vgmemory/utils/actionsUtils";
 const state = useActionStore.getState();
 export const DIR_BASE:number = 10; //direccion de memoria supuestas 
 export const DIR_FREEP:number = 20;
@@ -53,9 +53,9 @@ function xmalloc(nbytes: number) {
   let p: header | null;
   let prevp: header | null;
   //muestro creación de estos campos
-  let action = createActionVariable(30,"0x000","p");
+  let action = createActionVariable(DIR_P,"0x000","p");
   state.addAction(action,2);
-  action = createActionVariable(40,"0x000","prevp");
+  action = createActionVariable(DIR_PREVP,"0x000","prevp");
   state.addAction(action,2);
 
 
@@ -63,6 +63,7 @@ function xmalloc(nbytes: number) {
   //muesto la cantidad de espacio en headers que necesito
 
   prevp = freep;
+  action =  createActionPointing(DIR_P,DIR_PREVP);
 
   if (freep === null) {
     base.s.size = 0;
